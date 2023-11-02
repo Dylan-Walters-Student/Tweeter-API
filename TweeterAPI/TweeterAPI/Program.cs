@@ -3,8 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,9 +15,6 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowAnyOrigin());
-
-//Tell your app config where to find your connection string
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

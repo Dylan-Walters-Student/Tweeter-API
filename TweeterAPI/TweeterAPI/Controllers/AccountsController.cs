@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Claims;
 using TweeterAPI.Models;
 
 namespace TweeterAPI.Controllers

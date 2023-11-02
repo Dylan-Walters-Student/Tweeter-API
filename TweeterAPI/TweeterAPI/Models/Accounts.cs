@@ -5,7 +5,6 @@ namespace TweeterAPI.Models
 {
     public class Accounts
     {
-        [NotNull]
         public Guid Id { get; set; }
 
         public string? Name { get; set; }

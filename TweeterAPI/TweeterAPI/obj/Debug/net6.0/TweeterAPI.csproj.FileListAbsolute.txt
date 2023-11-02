@@ -74,3 +74,41 @@ C:\Users\dywa55d\Documents\GitHub\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\ne
 C:\Users\dywa55d\Documents\GitHub\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.pdb
 C:\Users\dywa55d\Documents\GitHub\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.genruntimeconfig.cache
 C:\Users\dywa55d\Documents\GitHub\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\ref\TweeterAPI.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.csproj.AssemblyReference.cache
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.AssemblyInfoInputs.cache
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.AssemblyInfo.cs
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.csproj.CoreCompileInputs.cache
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\refint\TweeterAPI.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.pdb
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\appsettings.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\TweeterAPI.exe
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\TweeterAPI.deps.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\TweeterAPI.runtimeconfig.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\TweeterAPI.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\TweeterAPI.pdb
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets\msbuild.TweeterAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.TweeterAPI.props
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.TweeterAPI.props
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.TweeterAPI.props
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\scopedcss\bundle\TweeterAPI.styles.css
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.csproj.CopyComplete
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\TweeterAPI.genruntimeconfig.cache
+C:\Users\ddwal\OneDrive\Documents\Github Clones\Tweeter-API\TweeterAPI\TweeterAPI\obj\Debug\net6.0\ref\TweeterAPI.dll

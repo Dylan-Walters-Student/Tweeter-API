@@ -2,7 +2,9 @@
 {
     public enum UpdateType
     {
-        Name = 1,
-
+        AccountName = 1,
+        AccountPassword = 2,
+        AccountEmail = 3,
+        accountBiography = 4
     }
 }

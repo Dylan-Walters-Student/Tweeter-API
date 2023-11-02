@@ -18,7 +18,7 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpPost(Name = "CreateAccounts")]
-        public async Task<IActionResult> Create([FromBody] Accounts account)
+        public async Task<IActionResult> Create([FromBody] Accounts accounts)
         {
             string commandText = "INSERT INTO Accounts (account_name, account_password, account_email, account_likes, account_biography) " +
                                 "VALUES (@account_name, @account_password, @account_email, @account_likes, @account_biography);";
@@ -32,19 +32,19 @@ namespace TweeterAPI.Controllers
                     try
                     {
                         cmd.Parameters.Add("@account_name", SqlDbType.NVarChar);
-                        cmd.Parameters["@account_name"].Value = account.Name;
+                        cmd.Parameters["@account_name"].Value = accounts.Name;
 
                         cmd.Parameters.Add("@account_password", SqlDbType.NVarChar);
-                        cmd.Parameters["@account_password"].Value = account.Password;
+                        cmd.Parameters["@account_password"].Value = accounts.Password;
 
                         cmd.Parameters.Add("@account_email", SqlDbType.NVarChar);
-                        cmd.Parameters["@account_email"].Value = account.Email;
+                        cmd.Parameters["@account_email"].Value = accounts.Email;
 
                         cmd.Parameters.Add("@account_likes", SqlDbType.Int);
-                        cmd.Parameters["@account_likes"].Value = account.Likes;
+                        cmd.Parameters["@account_likes"].Value = accounts.Likes;
 
                         cmd.Parameters.Add("@account_biography", SqlDbType.NVarChar);
-                        cmd.Parameters["@account_biography"].Value = account.Biography;
+                        cmd.Parameters["@account_biography"].Value = accounts.Biography;
 
                         cmd.ExecuteNonQuery();
                         return Ok("success");
@@ -88,27 +88,22 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpPut(Name = "UpdateAccounts")]
-        public async Task<IActionResult> Update([FromBody] Accounts accounts, int type)
+        public async Task<IActionResult> Update([FromBody] Accounts accounts, UpdateType type)
         {
             string commandText;
 
-            // 1 = name
-            // 2 = password
-            // 3 = email
-            // 4 = biography
-            // default = return/ bad request
             switch (type)
             {
-                case 1:
+                case UpdateType.AccountName:
                     commandText = $"UPDATE Accounts SET account_name = @account_name WHERE account_id = @account_id";
                     break;
-                case 2:
+                case UpdateType.AccountPassword:
                     commandText = $"UPDATE Accounts SET account_password = @account_password WHERE account_id = @account_id";
                     break;
-                case 3:
+                case UpdateType.AccountEmail:
                     commandText = $"UPDATE Accounts SET account_email = @account_email WHERE account_id = @account_id";
                     break;
-                case 4:
+                case UpdateType.accountBiography:
                     commandText = $"UPDATE Accounts SET account_biography = @account_biography WHERE account_id = @account_id";
                     break;
                 default:
@@ -128,19 +123,19 @@ namespace TweeterAPI.Controllers
 
                         switch (type)
                         {
-                            case 1:
+                            case UpdateType.AccountName:
                                 cmd.Parameters.Add("@account_name", SqlDbType.NVarChar);
                                 cmd.Parameters["@account_name"].Value = accounts.Name;
                                 break;
-                            case 2:
+                            case UpdateType.AccountPassword:
                                 cmd.Parameters.Add("@account_password", SqlDbType.NVarChar);
                                 cmd.Parameters["@account_password"].Value = accounts.Password;
                                 break;
-                            case 3:
+                            case UpdateType.AccountEmail:
                                 cmd.Parameters.Add("@account_email", SqlDbType.NVarChar);
                                 cmd.Parameters["@account_email"].Value = accounts.Email;
                                 break;
-                            case 4:
+                            case UpdateType.accountBiography:
                                 cmd.Parameters.Add("@account_biography", SqlDbType.NVarChar);
                                 cmd.Parameters["@account_biography"].Value = accounts.Biography;
                                 break;
@@ -154,6 +149,26 @@ namespace TweeterAPI.Controllers
                     {
                         return BadRequest(ex.Message);
                     }
+                }
+            }
+        }
+
+        [HttpDelete(Name = "DeleteAccounts")]
+        public async Task<IActionResult> Delete([FromBody] Accounts accounts)
+        {
+            string commandText = "DELETE FROM Accounts WHERE account_id LIKE @account_id";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(commandText, conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.Add("@account_id", SqlDbType.UniqueIdentifier);
+                    cmd.Parameters["@account_id"].Value = accounts.Id;
+
+                    cmd.ExecuteNonQuery();
+                    return Ok("success");
                 }
             }
         }

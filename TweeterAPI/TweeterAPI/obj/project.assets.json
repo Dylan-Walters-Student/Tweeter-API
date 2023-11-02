@@ -896,19 +896,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ddwal\\.nuget\\packages\\": {}
+    "C:\\Users\\dywa55d\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ddwal\\Documents\\Tweeter-API\\TweeterAPI\\TweeterAPI\\TweeterAPI.csproj",
+      "projectUniqueName": "C:\\Users\\dywa55d\\Documents\\GitHub\\Tweeter-API\\TweeterAPI\\TweeterAPI\\TweeterAPI.csproj",
       "projectName": "TweeterAPI",
-      "projectPath": "C:\\Users\\ddwal\\Documents\\Tweeter-API\\TweeterAPI\\TweeterAPI\\TweeterAPI.csproj",
-      "packagesPath": "C:\\Users\\ddwal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ddwal\\Documents\\Tweeter-API\\TweeterAPI\\TweeterAPI\\obj\\",
+      "projectPath": "C:\\Users\\dywa55d\\Documents\\GitHub\\Tweeter-API\\TweeterAPI\\TweeterAPI\\TweeterAPI.csproj",
+      "packagesPath": "C:\\Users\\dywa55d\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dywa55d\\Documents\\GitHub\\Tweeter-API\\TweeterAPI\\TweeterAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ddwal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dywa55d\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -916,6 +921,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },

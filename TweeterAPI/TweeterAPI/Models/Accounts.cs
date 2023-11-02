@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TweeterAPI.Models
 {
     public class Accounts
     {
-        public int Id { get; set; }
+        [NotNull]
+        public Guid Id { get; set; }
 
         public string? Name { get; set; }
 

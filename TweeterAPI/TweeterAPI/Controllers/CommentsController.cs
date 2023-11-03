@@ -20,8 +20,8 @@ namespace TweeterAPI.Controllers
         [HttpPost(Name = "CreateComments")]
         public async Task<IActionResult> Create([FromBody] Comments comment)
         {
-            string commandText = "INSERT INTO Comments (comment_id, source_id, source_type, comment_message, comment_likes) " +
-                                "VALUES (@comment_id, @source_id, @source_type, @comment_message, @comment_likes);";
+            string commandText = "INSERT INTO Comments (source_id, source_type, comment_message, comment_likes) " +
+                                "VALUES (@source_id, @source_type, @comment_message, @comment_likes);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -31,9 +31,6 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
-                        cmd.Parameters.Add("@comment_id", SqlDbType.Int);
-                        cmd.Parameters["@comment_id"].Value = comment.Id;
-
                         cmd.Parameters.Add("@source_id", SqlDbType.UniqueIdentifier);
                         cmd.Parameters["@source_id"].Value = comment.SourceId;
 
@@ -86,7 +83,7 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpPut(Name = "UpdateComments")]
-        public async Task<IActionResult> Update([FromBody] Comments comments, UpdateType type)
+        public async Task<IActionResult> Update([FromBody] Comments comments)
         {
             string commandText = $"UPDATE Comments SET comment_message = @comment_message WHERE comment_id = @comment_id";
                 
@@ -98,7 +95,7 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
-                        cmd.Parameters.Add("@comment_id", SqlDbType.UniqueIdentifier);
+                        cmd.Parameters.Add("@comment_id", SqlDbType.Int);
                         cmd.Parameters["@comment_id"].Value = comments.Id;
 
                         cmd.Parameters.Add("@comment_message", SqlDbType.NVarChar);

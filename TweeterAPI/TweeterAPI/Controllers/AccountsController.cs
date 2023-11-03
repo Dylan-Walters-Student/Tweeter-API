@@ -13,7 +13,7 @@ namespace TweeterAPI.Controllers
 
         public AccountsController(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("NewPerformanceTest1_DBConnection");
+            _connectionString = configuration.GetConnectionString("NotTwitter_DBConnection");
         }
 
         [HttpPost(Name = "CreateAccounts")]

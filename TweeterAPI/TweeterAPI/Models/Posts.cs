@@ -5,11 +5,7 @@ namespace TweeterAPI.Models
 {
     public class Posts
     {
-        [NotNull]
         public Guid Id { get; set; }
-
-        [NotNull]
-        public Guid SourceId { get; set; }
 
         public string Message { get; set; }
 

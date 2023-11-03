@@ -1,27 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml.Linq;
 using TweeterAPI.Models;
 
 namespace TweeterAPI.Controllers
 {
-    [Route("api/Comments")]
+    [Route("api/Posts")]
     [ApiController]
-    public class CommentsController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly string _connectionString;
 
-        public CommentsController(IConfiguration configuration)
+        public PostsController(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("NotTwitter_DBConnection");
         }
 
-        [HttpPost(Name = "CreateComments")]
-        public async Task<IActionResult> Create([FromBody] Comments comment)
+        [HttpPost(Name = "CreatePosts")]
+        public async Task<IActionResult> Create([FromBody] Posts posts)
         {
-            string commandText = "INSERT INTO Comments (comment_id, source_id, source_type, comment_message, comment_likes) " +
-                                "VALUES (@comment_id, @source_id, @source_type, @comment_message, @comment_likes);";
+            string commandText = "INSERT INTO Posts (posts_id, posts_message, posts_likes) " +
+                                "VALUES (@posts_id, @posts_message, @posts_likes);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -31,20 +30,14 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
-                        cmd.Parameters.Add("@comment_id", SqlDbType.Int);
-                        cmd.Parameters["@comment_id"].Value = comment.Id;
+                        cmd.Parameters.Add("@posts_id", SqlDbType.UniqueIdentifier);
+                        cmd.Parameters["@posts_id"].Value = posts.Id;
 
-                        cmd.Parameters.Add("@source_id", SqlDbType.UniqueIdentifier);
-                        cmd.Parameters["@source_id"].Value = comment.SourceId;
+                        cmd.Parameters.Add("@posts_message", SqlDbType.NVarChar);
+                        cmd.Parameters["@posts_message"].Value = posts.Message;
 
-                        cmd.Parameters.Add("@source_type", SqlDbType.NVarChar);
-                        cmd.Parameters["@source_type"].Value = comment.SourceType;
-
-                        cmd.Parameters.Add("@comment_message", SqlDbType.NVarChar);
-                        cmd.Parameters["@comment_message"].Value = comment.Message;
-
-                        cmd.Parameters.Add("@comment_likes", SqlDbType.Int);
-                        cmd.Parameters["@comment_likes"].Value = comment.Likes;
+                        cmd.Parameters.Add("@posts_likes", SqlDbType.Int);
+                        cmd.Parameters["@posts_likes"].Value = posts.Likes;
 
                         cmd.ExecuteNonQuery();
                         return Ok("success");
@@ -57,35 +50,34 @@ namespace TweeterAPI.Controllers
             }
         }
 
-        [HttpGet(Name = "GetComments")]
-        public IEnumerable<Comments> Get()
+        [HttpGet(Name = "GetPosts")]
+        public IEnumerable<Posts> Get()
         {
-            var _comments = new List<Comments>();
+            var _posts = new List<Posts>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Comments", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Posts", conn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        _comments.Add(new Comments
+                        _posts.Add(new Posts
                         {
-                            Id = (int)reader["comment_id"],
-                            SourceId = (Guid)reader["source_id"],
-                            Message = reader["comment_message"].ToString(),
-                            Likes = (int)reader["comment_likes"],
+                            Id = (Guid)reader["posts_id"],
+                            Message = reader["posts_message"].ToString(),
+                            Likes = (int)reader["posts_likes"],
                         });
                     }
                 }
             }
 
-            return _comments;
+            return _posts;
         }
 
-        [HttpPut(Name = "UpdateComments")]
+        [HttpPut(Name = "UpdatePosts")]
         public async Task<IActionResult> Update([FromBody] Comments comments, UpdateType type)
         {
             string commandText = $"UPDATE Comments SET comment_message = @comment_message WHERE comment_id = @comment_id";
@@ -116,7 +108,7 @@ namespace TweeterAPI.Controllers
             }
         }
 
-        [HttpDelete(Name = "DeleteComments")]
+        [HttpDelete(Name = "DeletePosts")]
         public async Task<IActionResult> Delete([FromBody] Comments comments)
         {
             string commandText = "DELETE FROM Comments WHERE comment_id LIKE @comment_id";
@@ -127,7 +119,7 @@ namespace TweeterAPI.Controllers
                 {
                     conn.Open();
 
-                    cmd.Parameters.Add("@comment_id", SqlDbType.Int);
+                    cmd.Parameters.Add("@comment_id", SqlDbType.UniqueIdentifier);
                     cmd.Parameters["@comment_id"].Value = comments.Id;
 
                     cmd.ExecuteNonQuery();

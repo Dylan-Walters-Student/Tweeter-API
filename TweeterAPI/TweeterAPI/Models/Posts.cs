@@ -10,5 +10,7 @@ namespace TweeterAPI.Models
         public string Message { get; set; }
 
         public int Likes { get; set; }
+
+        public DateTime UploadTime { get; set; }
     }
 }

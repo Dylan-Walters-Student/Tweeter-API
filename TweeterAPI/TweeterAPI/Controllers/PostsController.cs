@@ -19,8 +19,8 @@ namespace TweeterAPI.Controllers
         [HttpPost(Name = "CreatePosts")]
         public async Task<IActionResult> Create([FromBody] Posts posts)
         {
-            string commandText = "INSERT INTO Posts (posts_id, posts_message, posts_likes) " +
-                                "VALUES (@posts_id, @posts_message, @posts_likes);";
+            string commandText = "INSERT INTO Posts (posts_message, posts_likes, upload_time) " +
+                                "VALUES (@posts_message, @posts_likes, @upload_time);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -30,14 +30,14 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
-                        cmd.Parameters.Add("@posts_id", SqlDbType.UniqueIdentifier);
-                        cmd.Parameters["@posts_id"].Value = posts.Id;
-
                         cmd.Parameters.Add("@posts_message", SqlDbType.NVarChar);
                         cmd.Parameters["@posts_message"].Value = posts.Message;
 
                         cmd.Parameters.Add("@posts_likes", SqlDbType.Int);
                         cmd.Parameters["@posts_likes"].Value = posts.Likes;
+
+                        cmd.Parameters.Add("@upload_time", SqlDbType.DateTime);
+                        cmd.Parameters["@upload_time"].Value = DateTime.Now;
 
                         cmd.ExecuteNonQuery();
                         return Ok("success");
@@ -69,6 +69,7 @@ namespace TweeterAPI.Controllers
                             Id = (Guid)reader["posts_id"],
                             Message = reader["posts_message"].ToString(),
                             Likes = (int)reader["posts_likes"],
+                            UploadTime = (DateTime)reader["upload_time"],
                         });
                     }
                 }

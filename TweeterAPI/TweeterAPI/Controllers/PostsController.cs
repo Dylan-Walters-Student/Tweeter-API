@@ -19,8 +19,8 @@ namespace TweeterAPI.Controllers
         [HttpPost(Name = "CreatePosts")]
         public async Task<IActionResult> Create([FromBody] Posts posts)
         {
-            string commandText = "INSERT INTO Posts (posts_message, posts_likes, upload_time) " +
-                                "VALUES (@posts_message, @posts_likes, @upload_time);";
+            string commandText = "INSERT INTO Posts (account_id, posts_message, posts_likes, upload_time) " +
+                                "VALUES (@account_id, @posts_message, @posts_likes, @upload_time);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -30,6 +30,9 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
+                        cmd.Parameters.Add("@account_id", SqlDbType.UniqueIdentifier);
+                        cmd.Parameters["@account_id"].Value = posts.AccountId;
+
                         cmd.Parameters.Add("@posts_message", SqlDbType.NVarChar);
                         cmd.Parameters["@posts_message"].Value = posts.Message;
 
@@ -58,7 +61,7 @@ namespace TweeterAPI.Controllers
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Posts", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT \r\n\tp.posts_id\r\n\t, a.account_id\r\n\t, a.account_name\r\n\t, p.posts_message\r\n\t, p.posts_likes\r\n\t, count(c.source_id) AS replies_count\r\n\t, p.upload_time\r\nFROM \r\n\tPosts p\r\n\tJOIN Accounts a ON a.account_id = p.account_id\r\n\tLEFT JOIN Comments c ON c.source_id = p.posts_id\r\nGROUP BY\r\n\tp.posts_id\r\n\t, a.account_id\r\n\t, a.account_name\r\n\t, p.posts_message\r\n\t, p.posts_likes\r\n\t, p.upload_time\r\nORDER BY \r\n\tupload_time DESC;", conn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -67,8 +70,11 @@ namespace TweeterAPI.Controllers
                         _posts.Add(new Posts
                         {
                             Id = (Guid)reader["posts_id"],
+                            AccountId = (Guid)reader["account_id"],
+                            AccountName = reader["account_name"].ToString(),
                             Message = reader["posts_message"].ToString(),
                             Likes = (int)reader["posts_likes"],
+                            Replies = (int)reader["replies_count"],
                             UploadTime = (DateTime)reader["upload_time"],
                         });
                     }
@@ -79,9 +85,9 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpPut(Name = "UpdatePosts")]
-        public async Task<IActionResult> Update([FromBody] Comments comments, UpdateType type)
+        public async Task<IActionResult> Update([FromBody] Posts posts)
         {
-            string commandText = $"UPDATE Comments SET comment_message = @comment_message WHERE comment_id = @comment_id";
+            string commandText = $"UPDATE Posts SET posts_message = @posts_message, posts_likes = @posts_likes WHERE posts_id = @posts_id";
                 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -91,11 +97,14 @@ namespace TweeterAPI.Controllers
 
                     try
                     {
-                        cmd.Parameters.Add("@comment_id", SqlDbType.UniqueIdentifier);
-                        cmd.Parameters["@comment_id"].Value = comments.Id;
+                        cmd.Parameters.Add("@posts_id", SqlDbType.UniqueIdentifier);
+                        cmd.Parameters["@posts_id"].Value = posts.Id;
 
-                        cmd.Parameters.Add("@comment_message", SqlDbType.NVarChar);
-                        cmd.Parameters["@comment_message"].Value = comments.Message;
+                        cmd.Parameters.Add("@posts_message", SqlDbType.NVarChar);
+                        cmd.Parameters["@posts_message"].Value = posts.Message;
+
+                        cmd.Parameters.Add("@posts_likes", SqlDbType.NVarChar);
+                        cmd.Parameters["@posts_likes"].Value = posts.Likes;
 
                         cmd.ExecuteNonQuery();
 
@@ -110,9 +119,9 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpDelete(Name = "DeletePosts")]
-        public async Task<IActionResult> Delete([FromBody] Comments comments)
+        public async Task<IActionResult> Delete([FromBody] Posts posts)
         {
-            string commandText = "DELETE FROM Comments WHERE comment_id LIKE @comment_id";
+            string commandText = "DELETE FROM Posts WHERE posts_id LIKE @posts_id";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -120,8 +129,8 @@ namespace TweeterAPI.Controllers
                 {
                     conn.Open();
 
-                    cmd.Parameters.Add("@comment_id", SqlDbType.UniqueIdentifier);
-                    cmd.Parameters["@comment_id"].Value = comments.Id;
+                    cmd.Parameters.Add("@posts_id", SqlDbType.UniqueIdentifier);
+                    cmd.Parameters["@posts_id"].Value = posts.Id;
 
                     cmd.ExecuteNonQuery();
                     return Ok("success");

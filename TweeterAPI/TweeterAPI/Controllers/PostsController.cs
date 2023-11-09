@@ -19,8 +19,8 @@ namespace TweeterAPI.Controllers
         [HttpPost(Name = "CreatePosts")]
         public async Task<IActionResult> Create([FromBody] Posts posts)
         {
-            string commandText = "INSERT INTO Posts (account_id, posts_message, posts_likes, upload_time) " +
-                                "VALUES (@account_id, @posts_message, @posts_likes, @upload_time);";
+            string commandText = "INSERT INTO Posts (account_id, posts_message, posts_likes, upload_time)" +
+                                  "VALUES((SELECT account_id FROM Accounts WHERE account_id = @account_id), @posts_message, @posts_likes, @upload_time);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -61,7 +61,28 @@ namespace TweeterAPI.Controllers
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT \r\n\tp.posts_id\r\n\t, a.account_id\r\n\t, a.account_name\r\n\t, p.posts_message\r\n\t, p.posts_likes\r\n\t, count(c.source_id) AS replies_count\r\n\t, p.upload_time\r\nFROM \r\n\tPosts p\r\n\tJOIN Accounts a ON a.account_id = p.account_id\r\n\tLEFT JOIN Comments c ON c.source_id = p.posts_id\r\nGROUP BY\r\n\tp.posts_id\r\n\t, a.account_id\r\n\t, a.account_name\r\n\t, p.posts_message\r\n\t, p.posts_likes\r\n\t, p.upload_time\r\nORDER BY \r\n\tupload_time DESC;", conn))
+                using (SqlCommand cmd = new SqlCommand(
+                    @"
+SELECT 
+	p.posts_id, 
+	a.account_id, 
+	a.account_name, 
+	p.posts_message, 
+	p.posts_likes, 
+	count(c.source_id) AS replies_count, 
+	p.upload_time
+FROM 
+	Posts p
+	JOIN Accounts a ON a.account_id = p.account_id
+	LEFT JOIN Comments c ON c.source_id = p.posts_id
+GROUP BY 
+	p.posts_id, 
+	a.account_id,
+	a.account_name, 
+	p.posts_message, 
+	p.posts_likes, 
+	p.upload_time
+ORDER BY upload_time DESC;", conn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
 

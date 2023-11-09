@@ -19,8 +19,8 @@ namespace TweeterAPI.Controllers
         [HttpPost(Name = "CreatePosts")]
         public async Task<IActionResult> Create([FromBody] Posts posts)
         {
-            string commandText = "INSERT INTO Posts (account_id, posts_message, posts_likes, upload_time)" +
-                                  "VALUES((SELECT account_id FROM Accounts WHERE account_id = @account_id), @posts_message, @posts_likes, @upload_time);";
+            string commandText = @"INSERT INTO Posts (account_id, posts_message, posts_likes, upload_time)
+                                  VALUES((SELECT account_id FROM Accounts WHERE account_id = @account_id), @posts_message, @posts_likes, @upload_time);";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -61,8 +61,7 @@ namespace TweeterAPI.Controllers
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand(
-                    @"
+                using (SqlCommand cmd = new SqlCommand(@"
 SELECT 
 	p.posts_id, 
 	a.account_id, 
@@ -109,7 +108,7 @@ ORDER BY upload_time DESC;", conn))
         public async Task<IActionResult> Update([FromBody] Posts posts)
         {
             string commandText = $"UPDATE Posts SET posts_message = @posts_message, posts_likes = @posts_likes WHERE posts_id = @posts_id";
-                
+
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(commandText, conn))

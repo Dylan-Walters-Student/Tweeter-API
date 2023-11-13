@@ -87,27 +87,17 @@ namespace TweeterAPI.Controllers
         }
 
         [HttpPut(Name = "UpdateAccounts")]
-        public async Task<IActionResult> Update([FromBody] Accounts accounts, UpdateType type)
+        public async Task<IActionResult> Update([FromBody] Accounts accounts)
         {
-            string commandText;
+            string commandText =@"
+UPDATE Accounts SET 
+    account_email = @account_email , 
+    account_biography = @account_biography, 
+    account_password = @account_password, 
+    account_name = @account_name 
+WHERE 
+    account_id = @account_id";
 
-            switch (type)
-            {
-                case UpdateType.AccountName:
-                    commandText = $"UPDATE Accounts SET account_name = @account_name WHERE account_id = @account_id";
-                    break;
-                case UpdateType.AccountPassword:
-                    commandText = $"UPDATE Accounts SET account_password = @account_password WHERE account_id = @account_id";
-                    break;
-                case UpdateType.AccountEmail:
-                    commandText = $"UPDATE Accounts SET account_email = @account_email WHERE account_id = @account_id";
-                    break;
-                case UpdateType.accountBiography:
-                    commandText = $"UPDATE Accounts SET account_biography = @account_biography WHERE account_id = @account_id";
-                    break;
-                default:
-                    return BadRequest("Please return a proper type.");
-            }
                 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -120,25 +110,17 @@ namespace TweeterAPI.Controllers
                         cmd.Parameters.Add("@account_id", SqlDbType.UniqueIdentifier);
                         cmd.Parameters["@account_id"].Value = accounts.Id;
 
-                        switch (type)
-                        {
-                            case UpdateType.AccountName:
-                                cmd.Parameters.Add("@account_name", SqlDbType.NVarChar);
-                                cmd.Parameters["@account_name"].Value = accounts.Name;
-                                break;
-                            case UpdateType.AccountPassword:
-                                cmd.Parameters.Add("@account_password", SqlDbType.NVarChar);
-                                cmd.Parameters["@account_password"].Value = accounts.Password;
-                                break;
-                            case UpdateType.AccountEmail:
-                                cmd.Parameters.Add("@account_email", SqlDbType.NVarChar);
-                                cmd.Parameters["@account_email"].Value = accounts.Email;
-                                break;
-                            case UpdateType.accountBiography:
-                                cmd.Parameters.Add("@account_biography", SqlDbType.NVarChar);
-                                cmd.Parameters["@account_biography"].Value = accounts.Biography;
-                                break;
-                        }
+                        cmd.Parameters.Add("@account_name", SqlDbType.NVarChar);
+                        cmd.Parameters["@account_name"].Value = accounts.Name;
+
+                        cmd.Parameters.Add("@account_password", SqlDbType.NVarChar);
+                        cmd.Parameters["@account_password"].Value = accounts.Password;
+
+                        cmd.Parameters.Add("@account_email", SqlDbType.NVarChar);
+                        cmd.Parameters["@account_email"].Value = accounts.Email;
+
+                        cmd.Parameters.Add("@account_biography", SqlDbType.NVarChar);
+                        cmd.Parameters["@account_biography"].Value = accounts.Biography;
 
                         cmd.ExecuteNonQuery();
 
